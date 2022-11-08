@@ -1,5 +1,7 @@
 # OpenAssetIO Code Generation Tool
 
+FAKE NOT REAL CHANGE
+
 The `openassetio-traitgen` tool can be used to generate Trait and
 Specification classes from a simple YAML description. This avoids
 the laborious and error-prone task of creating these by hand.
