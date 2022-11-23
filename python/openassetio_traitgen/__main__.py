@@ -30,7 +30,6 @@ import sys
 import logging
 
 from . import generate
-from . import generators
 
 #
 # Defaults
@@ -62,9 +61,6 @@ def _create_argparser():
             supplied file, containing the simplified declaration of one or more
             traits or specifications using the OpenAssetIO traits and
             specification declaration schema.
-
-            By default, code is generated for all supported unless one or more
-            language flags are specified.
             """
         ),
     )
@@ -124,8 +120,8 @@ def _create_argparser():
 
     cmdline.add_argument(
         "--python",
-        dest="languages",
-        action="append_const",
+        dest="generator",
+        action="store_const",
         const="python",
         help="Generate Python classes",
     )
@@ -181,7 +177,7 @@ def main():
     generate(
         args.input,
         args.output_dir,
-        args.languages or generators.ALL,
+        args.generator,
         creation_callback,
         logger,
         args.dry_run,

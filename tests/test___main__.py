@@ -81,17 +81,17 @@ class Test_CLI_args_dry_run:
     ):
         execute_cli("--python", "-o", tmp_path, yaml_path_minimal)
 
-        assert os.path.isdir(os.path.join(tmp_path, "python"))
+        assert os.path.isdir(os.path.join(tmp_path, "p_p"))
 
     def test_when_d_set_then_code_is_not_generated(self, yaml_path_minimal, tmp_path):
         execute_cli("--python", "-d", "-o", tmp_path, yaml_path_minimal)
 
-        assert not os.path.isdir(os.path.join(tmp_path, "python"))
+        assert not os.path.isdir(os.path.join(tmp_path, "p_p"))
 
     def test_when_dryrun_set_then_code_is_not_generated(self, yaml_path_minimal, tmp_path):
         execute_cli("--python", "--dry-run", "-o", tmp_path, yaml_path_minimal)
 
-        assert not os.path.isdir(os.path.join(tmp_path, "python"))
+        assert not os.path.isdir(os.path.join(tmp_path, "p_p"))
 
     def test_when_set_then_exit_code_is_zero(self, yaml_path_minimal, tmp_path):
         assert execute_cli("--python", "-d", "-o", tmp_path, yaml_path_minimal).returncode == 0
@@ -104,27 +104,25 @@ class Test_CLI_args_output_dir:
     def test_when_o_set_then_code_is_generated_to_expected_path(self, yaml_path_minimal, tmp_path):
         execute_cli("--python", "-o", tmp_path, yaml_path_minimal)
 
-        assert os.path.isdir(os.path.join(tmp_path, "python"))
+        assert os.path.isdir(os.path.join(tmp_path, "p_p"))
 
     def test_when_outputdir_set_then_code_is_generated_to_expected_path(
         self, yaml_path_minimal, tmp_path
     ):
         execute_cli("--python", "--output-dir", tmp_path, yaml_path_minimal)
 
-        assert os.path.isdir(os.path.join(tmp_path, "python"))
+        assert os.path.isdir(os.path.join(tmp_path, "p_p"))
 
 
 class Test_CLI_args_copyright_owner:
     def test_when_not_set_then_no_copyright_added(self, tmp_path, yaml_path_minimal):
         execute_cli("--python", "-o", tmp_path, yaml_path_minimal)
 
-        assert "SPDX-License-Identifier:" not in file_contents(
-            tmp_path, "python", "p_p", "__init__.py"
-        )
+        assert "SPDX-License-Identifier:" not in file_contents(tmp_path, "p_p", "__init__.py")
 
     def test_when_set_then_copyright_added_with_owner(self, tmp_path, yaml_path_minimal):
         execute_cli("--python", "--copyright-owner", "An Owner", "-o", tmp_path, yaml_path_minimal)
-        contents = file_contents(tmp_path, "python", "p_p", "__init__.py")
+        contents = file_contents(tmp_path, "p_p", "__init__.py")
 
         assert "SPDX-License-Identifier:" in contents
         assert "An Owner" in contents
@@ -133,7 +131,7 @@ class Test_CLI_args_copyright_owner:
 class Test_CLI_args_copyright_date:
     def test_when_not_set_then_copyright_date_is_this_year(self, tmp_path, yaml_path_minimal):
         execute_cli("--python", "--copyright-owner", "An Owner", "-o", tmp_path, yaml_path_minimal)
-        contents = file_contents(tmp_path, "python", "p_p", "__init__.py")
+        contents = file_contents(tmp_path, "p_p", "__init__.py")
 
         assert f"Copyright {datetime.date.today().year} An Owner" in contents
 
@@ -148,7 +146,7 @@ class Test_CLI_args_copyright_date:
             tmp_path,
             yaml_path_minimal,
         )
-        contents = file_contents(tmp_path, "python", "p_p", "__init__.py")
+        contents = file_contents(tmp_path, "p_p", "__init__.py")
 
         assert "Copyright 2010-2022 An Owner" in contents
 
@@ -156,7 +154,7 @@ class Test_CLI_args_copyright_date:
 class Test_CLI_args_spdxLicenseIdentifier:
     def test_when_not_set_then_apache_two_used(self, tmp_path, yaml_path_minimal):
         execute_cli("--python", "--copyright-owner", "An Owner", "-o", tmp_path, yaml_path_minimal)
-        contents = file_contents(tmp_path, "python", "p_p", "__init__.py")
+        contents = file_contents(tmp_path, "p_p", "__init__.py")
 
         assert "SPDX-License-Identifier: Apache-2.0" in contents
 
@@ -173,7 +171,7 @@ class Test_CLI_args_spdxLicenseIdentifier:
             tmp_path,
             yaml_path_minimal,
         )
-        contents = file_contents(tmp_path, "python", "p_p", "__init__.py")
+        contents = file_contents(tmp_path, "p_p", "__init__.py")
 
         assert "SPDX-License-Identifier: Unlicense" in contents
 
@@ -190,13 +188,13 @@ class Test_CLI_args_python:
     def test_when_python_set_then_python_is_generated(self, tmp_path, yaml_path_minimal):
         execute_cli("--python", "-o", tmp_path, yaml_path_minimal)
 
-        assert os.path.isdir(os.path.join(tmp_path, "python"))
+        assert os.path.isdir(os.path.join(tmp_path, "p_p"))
 
     def test_when_only_python_set_then_only_python_is_generated(self, tmp_path, yaml_path_minimal):
         execute_cli("--python", "-o", tmp_path, yaml_path_minimal)
 
         assert os.listdir(tmp_path) == [
-            "python",
+            "p_p",
         ]
 
 
@@ -205,7 +203,7 @@ class Test_CLI_default_languages:
         execute_cli("--python", "-o", tmp_path, yaml_path_minimal)
 
         assert os.listdir(tmp_path) == [
-            "python",
+            "p_p",
         ]
 
 
