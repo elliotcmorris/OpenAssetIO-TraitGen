@@ -332,7 +332,9 @@ TEMPLATE_TEST_CASE("Property getters", "", openassetio_abi::Bool, openassetio_ab
 
       THEN("value is as expected") {
         REQUIRE(value.has_value());
-        CHECK(value.value() == Fixture::kExpectedValue);
+        // Guard required because clang-tidy isn't clever enough to
+        // understand the require.
+        if (value.has_value()){ CHECK(value.value() == Fixture::kExpectedValue); }
       }
     }
 
