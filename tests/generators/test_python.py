@@ -448,6 +448,22 @@ class Test_AllPropertiesTrait_getter:
 
         assert getter() is None
 
+    def test_when_get_property_on_blank_TraitsData_view_then_returns_None(
+        self, all_properties_trait, an_empty_traitsData, property_
+    ):
+        a_trait = all_properties_trait(an_empty_traitsData)
+        getter = getattr(a_trait, f"get{property_.name[0].upper()}{property_.name[1:]}")
+
+        assert getter() is None
+
+    def test_when_get_property_on_blank_TraitsData_view_default_value_given_then_returns_default(
+        self, all_properties_trait, an_empty_traitsData, property_
+    ):
+        a_trait = all_properties_trait(an_empty_traitsData)
+        getter = getattr(a_trait, f"get{property_.name[0].upper()}{property_.name[1:]}")
+
+        assert getter(defaultValue=property_.valid_value) == property_.valid_value
+
     def test_when_property_not_set_and_default_given_then_returns_default(
         self, all_properties_trait, an_all_properties_traitsData, property_
     ):
