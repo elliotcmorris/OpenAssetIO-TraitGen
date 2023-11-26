@@ -350,9 +350,7 @@ TEMPLATE_TEST_CASE("Property getters", "", openassetio_abi::Bool, openassetio_ab
     const Fixture fixture{AllPropertiesTrait{traitsData}};
 
     WHEN("property is queried without a default") {
-      THEN("optional return is empty") {
-        CHECK(!fixture.getProperty().has_value());
-      }
+      THEN("optional return is empty") { CHECK(!fixture.getProperty().has_value()); }
     }
 
     WHEN("property is queried with a default") {
@@ -371,9 +369,7 @@ TEMPLATE_TEST_CASE("Property getters", "", openassetio_abi::Bool, openassetio_ab
     const Fixture fixture{AllPropertiesTrait{traitsData}};
 
     WHEN("property is queried without a default") {
-      THEN("optional return is empty") {
-        CHECK(!fixture.getProperty().has_value());
-      }
+      THEN("optional return is empty") { CHECK(!fixture.getProperty().has_value()); }
     }
 
     WHEN("property is queried with a default") {
